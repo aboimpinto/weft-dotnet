@@ -1,16 +1,21 @@
 # Framework source
 
-The source packages will be introduced only when their public contract is
-defined and covered by a runnable example.
-
-The intended package boundaries are:
+The first server-only packages are implemented and exercised by the runnable
+starter example. They remain experimental and are not published NuGet packages
+or compatibility commitments.
 
 ```text
-Weft.Abstractions   Feature metadata and shared contracts
-Weft.Generator      Source-generated manifest, registration, and diagnostics
-Weft.Server         ASP.NET Core hosting, rendering, and server actions
+Weft.Abstractions   Implemented: feature metadata and manifest descriptors
+Weft.Generator      Implemented: generated Feature.Manifest properties and diagnostics
+Weft.Server         Implemented: explicit registration and deterministic endpoint mapping
+```
+
+The later package boundaries are:
+
+```text
 Weft.Browser        Browser-safe capability hosting and typed interop
 Weft.Assets         Asset-manifest build and publish integration
 ```
 
-These are design names, not published packages or compatibility commitments.
+The first implementation intentionally keeps general template rendering and
+asset-pipeline APIs private to the example until their contracts are designed.

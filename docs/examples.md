@@ -9,7 +9,7 @@ interaction.
 
 | Example | Primary purpose | Required proof |
 | --- | --- | --- |
-| `starter-html` | Baseline HTML-first workflow | A usable server page with no Node build, no browser .NET runtime, normal forms, and an accessible fallback |
+| `starter-html` | Baseline HTML-first workflow | **Implemented:** a usable server page with no Node build, no browser .NET runtime, feature-owned template/CSS, antiforgery, and normal form fallback |
 | `tailwind-orders` | Optional build-time asset integration | Tailwind sees feature templates during content scanning; published output contains the required CSS only |
 | `bootstrap-admin` | Conventional business UI | Bootstrap CSS works with server forms; no Bootstrap JS is sent unless a declared behavior requires it |
 | `pico-portal` | Low-tooling CSS-first UI | A polished small portal works with static CSS and ordinary HTML semantics |

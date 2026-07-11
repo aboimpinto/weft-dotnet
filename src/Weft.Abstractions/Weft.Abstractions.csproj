@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Weft.Abstractions</PackageId>
+    <Description>Feature metadata contracts for the Weft HTML-first .NET platform.</Description>
+  </PropertyGroup>
+</Project>

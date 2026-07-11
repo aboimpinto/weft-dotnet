@@ -12,22 +12,33 @@ Current focus:
 - define the example and payload-measurement contracts;
 - choose the final public name, repository slug, license, and support policy.
 
-## Phase 1 — Generated feature manifest
+## Phase 1 — Generated trusted feature registration (implemented)
 
-Build the source-generated core that replaces manual module lists, string
-dispatch, and reflection-based routing.
+The first runnable slice replaces manual module lists and runtime assembly
+scanning with generated `Feature.Manifest` properties.
 
-Success means:
+Implemented:
 
-- explicit trusted feature registration;
-- generated route and DI catalog;
-- duplicate feature/route/action diagnostics;
-- deployment list for feature templates and styles;
-- generated action-to-execution-mode map.
+- explicit host selection through `AddWeft(Feature.Manifest, ...)`;
+- direct generated factories instead of runtime reflection;
+- deterministic `MapWeft()` module mapping;
+- source-local diagnostics for feature shape, partial classes, constructors,
+  IDs, declared routes, and declared actions;
+- runtime verification that each feature's mapped endpoints match its declared
+  route metadata;
+- a separate feature library and server-only starter with normal forms,
+  antiforgery, post/redirect/get, and tests.
 
-## Phase 2 — Server HTML and enhanced server actions
+Still deferred within this phase:
 
-Deliver the two modes that do not require browser .NET:
+- deeper compile-time analysis of imperative endpoint code;
+- cross-package compile-time duplicate diagnostics;
+- template/style deployment and asset manifests;
+- content hashing, integrity, and payload budgets.
+
+## Phase 2 — Enhanced server actions
+
+The HTML action baseline is implemented. Add the second no-browser-.NET mode:
 
 - server-rendered page/fragment composition;
 - normal links and forms as the baseline;
@@ -35,7 +46,8 @@ Deliver the two modes that do not require browser .NET:
 - CSRF, validation, authorization, errors, cancellation, and navigation
   semantics documented and tested.
 
-The `starter-html` example becomes runnable here.
+The `starter-html` example is already runnable; enhanced action behavior needs
+a dedicated example and its own failure/accessibility test matrix.
 
 ## Phase 3 — Typed browser boundary
 

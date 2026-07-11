@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Weft.Examples.StarterHtml.Web</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Weft.Examples.StarterHtml.Feature\Weft.Examples.StarterHtml.Feature.csproj" />
+    <ProjectReference Include="..\..\..\src\Weft.Server\Weft.Server.csproj" />
+  </ItemGroup>
+</Project>

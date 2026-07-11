@@ -26,6 +26,31 @@ Orders feature
     └── lazy capability asset group
 ```
 
+## Current server foundation
+
+The first implementation intentionally covers only the server-first base:
+
+- `Weft.Abstractions` defines feature, route, and action metadata;
+- `Weft.Generator` emits a `Manifest` property into each valid partial feature
+  class;
+- `Weft.Server` accepts only manifests explicitly selected by the host;
+- `AddWeft(...)` rejects duplicate declared feature IDs, route metadata, and
+  endpoint names before the application is built;
+- `MapWeft()` invokes each selected module in deterministic feature-ID order.
+
+The manifest factory is generated as a direct `new FeatureType()` call. There
+is no runtime assembly scan and no reflection-based endpoint dispatch.
+
+During mapping, Weft compares the feature's declared method, route, and endpoint
+name metadata against the actual endpoints newly added by that feature. A
+mismatch fails application startup rather than silently weakening duplicate-route
+validation. In this first implementation, call `MapWeft()` before adding
+host-owned endpoints so each feature's endpoint set can be isolated reliably.
+
+The starter's template renderer and embedded CSS are intentionally
+example-private. A general template language, transitive package asset
+deployment, content hashes, and an asset manifest remain future work.
+
 ## Execution placement
 
 An interaction has one declared placement. It must not accidentally become
@@ -70,9 +95,13 @@ long-running local workflow.
 
 ## Generated manifest
 
-The platform should generate a single manifest from source metadata. That
-manifest is the contract joining server registration, templates, actions,
-assets, and browser dispatch.
+The current generator produces one manifest per feature class. It validates the
+feature shape, its identifier, constructor convention, and its class-level
+route/action metadata. The host explicitly passes the generated manifests it
+trusts to `AddWeft(...)`.
+
+The future platform should expand that into a broader manifest joining server
+registration, templates, actions, assets, and browser dispatch.
 
 Expected generated responsibilities:
 
@@ -85,9 +114,12 @@ Expected generated responsibilities:
 - validate browser/server project references and invalid APIs;
 - report initial, first-action, warm-cache, and retained-payload budgets.
 
-The current goal is source-generated registration, not scanning every DLL found
-on a server. A production application must choose its trusted feature
-assemblies deliberately.
+The generator cannot infer arbitrary routes inside imperative `MapEndpoints`
+code, but runtime validation makes the route declaration authoritative for the
+currently mapped endpoint set. Deeper compile-time endpoint analysis is a later
+generator milestone. Action metadata is descriptive in this slice; only the
+ordinary `Html` execution mode exists today. Weft will not scan every DLL
+found on a server.
 
 ## Rendering and DOM ownership
 

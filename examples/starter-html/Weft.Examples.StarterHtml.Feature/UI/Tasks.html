@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weft starter — Tasks</title>
+  <link rel="stylesheet" href="/_weft/tasks/tasks.css">
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Weft starter</p>
+    <h1>Tasks</h1>
+    <p class="intro">
+      This page is server-rendered HTML. The form works without JavaScript and
+      no browser .NET runtime is loaded.
+    </p>
+    <p class="demo-note">
+      This is bounded in-memory demonstration data shared by this local sample.
+      Do not enter personal or confidential information.
+    </p>
+
+    {{validationError}}
+
+    <form method="post" action="/tasks">
+      <input type="hidden" name="__RequestVerificationToken" value="{{antiforgeryToken}}">
+      <label for="title">New task</label>
+      <div class="new-task">
+        <input id="title" name="title" maxlength="120" required>
+        <button type="submit">Add task</button>
+      </div>
+    </form>
+
+    <section aria-labelledby="task-list-heading">
+      <h2 id="task-list-heading">Current tasks</h2>
+      <ul class="task-list">
+        {{tasks}}
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

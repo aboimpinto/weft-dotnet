@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Weft.Examples.StarterHtml.Feature</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\..\..\src\Weft.Abstractions\Weft.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\src\Weft.Server\Weft.Server.csproj" />
+    <ProjectReference Include="..\..\..\src\Weft.Generator\Weft.Generator.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false" />
+    <EmbeddedResource Include="UI\Tasks.html" />
+    <EmbeddedResource Include="UI\Tasks.css" />
+  </ItemGroup>
+</Project>
