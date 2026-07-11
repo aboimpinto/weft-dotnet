@@ -1,8 +1,8 @@
 # Contributing to Weft
 
-Weft is currently an experimental architecture repository. Design discussion is
-welcome, but code contributions are deferred until the repository has a public
-license and contribution terms.
+Weft is currently an experimental architecture repository. Design discussion
+and code contributions are welcome. By submitting a contribution, you agree
+that it may be distributed under the repository's [MIT License](LICENSE).
 
 When implementation starts, before proposing a new feature first describe where
 it executes and why:

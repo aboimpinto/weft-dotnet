@@ -10,7 +10,7 @@ Current focus:
 - capture the product boundary and package policy;
 - preserve the experimental status of existing ideas;
 - define the example and payload-measurement contracts;
-- choose the final public name, repository slug, license, and support policy.
+- choose the final public name, repository slug, and support policy.
 
 ## Phase 1 — Generated trusted feature registration (implemented)
 

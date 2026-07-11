@@ -176,5 +176,4 @@ selects a public license. The intended contribution principles are in
 
 ## License
 
-A public license has not yet been selected. Do not assume reuse rights or
-submit code contributions until the repository owner chooses and adds one.
+Weft is licensed under the [MIT License](LICENSE).
