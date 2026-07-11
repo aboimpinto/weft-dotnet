@@ -1,0 +1,29 @@
+# .NET build output
+[Bb]in/
+[Oo]bj/
+TestResults/
+
+# Local IDE state
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Optional Node-based asset tooling
+node_modules/
+.pnpm-store/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local Weft build diagnostics and generated deployment output
+.weft/
+artifacts/
+
+# Secrets and local settings
+.env
+.env.*
+appsettings.Development.local.json
