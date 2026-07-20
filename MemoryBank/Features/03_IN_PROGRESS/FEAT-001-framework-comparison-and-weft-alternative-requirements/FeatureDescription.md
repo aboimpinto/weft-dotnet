@@ -2,8 +2,11 @@
 
 **Feature ID**: FEAT-001
 **Parent Epic**: EPIC-001
-**Status**: Submitted
+**Status**: Manual Review Ready With Findings
 **Priority**: P0
+**Work Type**: R&D / Documentation Spike
+**Execution Mode**: Manual investigation in the active agent conversation;
+do not continue this item through Hepha's development workflow
 
 ## Summary
 
@@ -31,6 +34,29 @@ The intended conclusion is not predetermined. The research may determine that
 Blazor or another platform already solves a category well enough that Weft
 should interoperate, reuse supported infrastructure, or declare the category a
 non-goal.
+
+## Manual Research Execution
+
+Hepha generated the first Phase 0–8 skeleton before this work was reclassified.
+The phase files have now been renamed and rewritten around these research
+responsibilities:
+
+| Research phase | Responsibility |
+| --- | --- |
+| Phase 0 — Research Baseline | Repository baseline, current-versus-target boundary, and research risks |
+| Phase 1 — Research Methodology and Evidence Contract | Evidence schema, version policy, comparison contract, and acceptance traceability |
+| Phase 2 — Framework Capability Profiles | Source acquisition and 24-dimension framework capability matrix |
+| Phase 3 — Praised Qualities and Pain Analysis | Praised qualities, recurring pains, workarounds, and Weft responses |
+| Phase 4 — Reference Application Contract | Framework-neutral reference business application contract |
+| Phase 5 — Browser Experience and Accessibility Criteria | Browser-visible, accessibility, and visual acceptance contract for the reference app |
+| Phase 6 — Weft Requirements and Decision Synthesis | Benchmark methodology, ranked Weft requirements, and gap/decision backlog |
+| Phase 7 — Evidence Audit and Overview Update | Cross-document evidence, terminology, and acceptance audit |
+| Phase 8 — Research Closure and Follow-up | Owner-ready synthesis, unresolved questions, and follow-up classification |
+
+Any remaining Hepha task-state sections are explicitly marked as historical
+records. From this decision onward, phase work and evidence are written
+manually in this conversation. No development prompts, code implementation
+phases, or automatic lifecycle continuation apply.
 
 ## Mandatory Platforms And Scope
 
@@ -329,38 +355,59 @@ Create the following in this feature folder during investigation:
    Adapt/Interoperate/Defer/Reject decisions, and proposed follow-up features.
 7. Updates to `MemoryBank/Overview/technical-overview.md` reflecting approved
    conclusions and clearly separating evidence from prediction.
+8. `developer-errors-and-native-shell-integration.md` — Development-only error
+   overlay and production-safe failure contract; Electron, Tauri, Electrobun,
+   Capacitor, and framework-neutral native WebView shell integration modes.
+9. `installation-and-bootstrap-strategy.md` — official-platform installation
+   comparison and proposed Weft bootstrap, local-tool, profile, restore,
+   update, offline/mirror, security, and removal lifecycle.
+10. `research-recheck-2026-07-20.md` plus `MemoryBank/Overview/README.md` and its
+    linked topic documents — independent structural/semantic/source/code
+    recheck and durable Overview handoff with findings and closure conditions.
 
 ## Acceptance Criteria
 
-- [ ] All five mandatory platform entries record evaluated version/status,
+- [x] All five mandatory platform entries record evaluated version/status,
   access date, deployment mode, and primary official sources.
-- [ ] All 24 comparison dimensions contain evidence or an explicit “not
+- [x] All 24 comparison dimensions contain evidence or an explicit “not
   applicable/not yet implemented” result for every mandatory platform.
-- [ ] Each platform has at least five material praised qualities and five
+- [x] Each platform has at least five material praised qualities and five
   material pains; weakly evidenced items are labelled rather than promoted to
   conclusions.
-- [ ] TanStack Start is compared as the framework and supporting TanStack
+- [x] TanStack Start is compared as the framework and supporting TanStack
   packages are not misrepresented as one monolithic product.
-- [ ] Current Weft capability is visibly separated from target Weft hypothesis.
-- [ ] The reference application and benchmark plan are detailed enough for
+- [x] Current Weft capability is visibly separated from target Weft hypothesis.
+- [x] The reference application and benchmark plan are detailed enough for
   separate agents or developers to create equivalent implementations without
   inventing different requirements.
-- [ ] Requirements are ranked Must/Should/Could/Won't, deduplicated, and mapped
+- [x] Requirements are ranked Must/Should/Could/Won't, deduplicated, and mapped
   to evidence, avoided pain, measurable acceptance, and roadmap phase.
-- [ ] Every competitor mechanism receives an explicit Weft decision; “copy it”
+- [x] Every competitor mechanism receives an explicit Weft decision; “copy it”
   without architectural rationale is not accepted.
-- [ ] Dependency analysis includes project-local disk use, cache reuse,
+- [x] Dependency analysis includes project-local disk use, cache reuse,
   lockfiles, transitive graph, lifecycle scripts, provenance, license, and
   published output—not only `node_modules` size.
-- [ ] Performance conclusions use comparable reproduced measurements or remain
+- [x] Performance conclusions use comparable reproduced measurements or remain
   labelled hypotheses.
-- [ ] Security and accessibility are evaluated as first-class platform
+- [x] Security and accessibility are evaluated as first-class platform
   capabilities, not deferred footnotes.
-- [ ] The technical overview is updated and any proposed changes to public
+- [x] The technical overview is updated and any proposed changes to public
   architecture, package policy, or roadmap documents are listed for owner
   approval.
 - [ ] Follow-up FEAT candidates are bounded and traceable to approved Must or
   Should requirements.
+- [x] The developer-error contract maps .NET/generated/template failures to
+  useful Development source context while proving that Production output does
+  not expose stack traces, source paths, code frames, editor links, or secrets.
+- [x] Native-shell research distinguishes desktop-only and mobile-capable
+  tools, server-hosted/static/sidecar modes, native bridge security, lifecycle,
+  and the current limitation that Weft SSR is not directly bundleable as a
+  local mobile frontend.
+- [x] Installation research distinguishes framework bootstrap from project
+  creation and dependency restore, compares official platform flows, and
+  specifies a verified `wget`/PowerShell bootstrap plus pinned local .NET tool,
+  pure-mode prerequisite, optional-profile, CI/offline, update, and removal
+  contract without presenting proposed commands as implemented.
 
 ## Out Of Scope
 
@@ -388,7 +435,7 @@ Create the following in this feature folder during investigation:
 - [Weft roadmap](../../../../docs/roadmap.md)
 - [Weft package ecosystem](../../../../docs/package-ecosystem.md)
 
-## Hepha Deep-Dive Decisions
+## Historical Hepha Research Decisions
 
 Recorded: 2026-07-15T07:05:46.181Z
 

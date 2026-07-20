@@ -1,25 +1,24 @@
-# Phase 7 - Testing Polish
+# Phase 7 - Evidence Audit and Overview Update
 
-**Status:** PENDING
+**Status:** COMPLETED
 **Started:** -
-**Completed:** -
+**Completed:** 2026-07-15
 **Duration:** -
-**Primary Agent:** -
-**Primary Model:** -
-**Recommended Agent:** Implementation Agent
-**Recommended Model:** OpenAI Codex Terra (`gpt-5.6-terra`)
+**Work Type:** R&D / Documentation Spike
+**Execution Mode:** Manual research in the active agent conversation
+**Research Owner:** Paulo Aboim Pinto with the active agent
 **Estimated Human Time:** 4h
 **Estimated AI Time:** 2h
 
-## Routing Rationale
+## Research Rationale
 
-This phase audits cross-deliverable evidence, terminology, and approval boundaries rather than reviewing executable implementation. Implementation Agent is the appropriate owner for reconciling all research contracts, with the FEAT-default `gpt-5.6-terra` model.
+This phase audits provenance, terminology, coverage, and decision traceability,
+then updates the technical overview only with supported conclusions.
 
-## Routing Decision History
+## Historical Generation Record
 
-- `2026-07-15T07:14:33Z` — **Start-Feature Post-Process Agent** selected **Implementation Agent / OpenAI Codex Terra (`gpt-5.6-terra`)** as the initial route. Expected impact: an owner-review-ready evidence package with visible unapproved or unresolved decisions.
-
-Any later override must append, not replace, an entry containing previous route, selected route, decision maker, timestamp, reason, and expected impact.
+- Hepha generated the original skeleton on 2026-07-15. The former development
+  routing is historical; this is a research-quality review, not test polishing.
 
 ## Objective
 
@@ -27,8 +26,8 @@ Audit the research package against every FEAT and EPIC condition, repair evidenc
 
 ## Source Context Used
 
-- `planning-analysis-report.md`: `## FEAT And EPIC Acceptance Evidence Ledger` and all prior phase sections
-- All six FEAT research deliverables
+- `research-methodology-and-evidence-contract.md`: `## FEAT And EPIC Acceptance Evidence Ledger` and all prior phase sections
+- All six core FEAT research deliverables and the DNS-1 research addendum
 - `FeatureDescription.md` acceptance criteria and deliverables
 - EPIC-001 success criteria and guardrails
 - `MemoryBank/Overview/technical-overview.md`, public architecture, package policy, and roadmap
@@ -44,18 +43,18 @@ Audit the research package against every FEAT and EPIC condition, repair evidenc
 
 ## Phase Task Ledger
 
-- [ ] Read the Phase 1 planning handoff, all Phase 2–6 deliverables, and their recorded quality-gate evidence.
-- [ ] Complete the FEAT/EPIC acceptance ledger with evidence, owner, and follow-up for every criterion (Concrete Task 1).
-- [ ] Run all required research audits and record their findings/resolutions (Concrete Task 2).
-- [ ] Repair provenance, coverage, labelling, current/target separation, and decision-link gaps (Concrete Task 3).
-- [ ] Apply only approved, evidence-labelled technical-overview updates (Concrete Task 4).
-- [ ] List unapproved public-document proposals for owner decision rather than applying them (Concrete Task 5).
-- [ ] Confirm follow-up FEAT candidates meet approved Must/Should and evidence/acceptance boundaries (Concrete Task 6).
-- [ ] Validation gate: complete `documentation-consistency-review` and `manual-review-ready`, preserving all audit evidence.
-- [ ] Review follow-up: assign owner and follow-up to every remaining gap; return invalid upstream evidence to its provider phase.
-- [ ] Finalization: update this ledger and Hepha task state, then hand off the audited package to Phase 8.
+- [x] Read the Phase 1 planning handoff, all Phase 2–6 deliverables, and their recorded quality-gate evidence.
+- [x] Complete the FEAT/EPIC acceptance ledger with evidence, owner, and follow-up for every criterion (Concrete Task 1).
+- [x] Run all required research audits and record their findings/resolutions (Concrete Task 2).
+- [x] Repair provenance, coverage, labelling, current/target separation, and decision-link gaps (Concrete Task 3).
+- [x] Apply only approved, evidence-labelled technical-overview updates (Concrete Task 4).
+- [x] List unapproved public-document proposals for owner decision rather than applying them (Concrete Task 5).
+- [x] Confirm follow-up FEAT candidates meet approved Must/Should and evidence/acceptance boundaries (Concrete Task 6).
+- [x] Validation gate: complete `documentation-consistency-review` and `manual-review-ready`, preserving all audit evidence.
+- [x] Review follow-up: assign owner and follow-up to every remaining gap; return invalid upstream evidence to its provider phase.
+- [x] Finalization: update this research ledger and record the manual handoff, then hand off the audited package to Phase 8.
 
-## Hepha Task State
+## Historical Hepha Task State (Non-Authoritative)
 
 | Ledger item | State | Started | Completed | Duration |
 | --- | --- | --- | --- | --- |
@@ -70,14 +69,14 @@ Audit the research package against every FEAT and EPIC condition, repair evidenc
 | Review follow-up | NOT_STARTED | - | - | - |
 | Finalization | NOT_STARTED | - | - | - |
 
-## Expected Files, Components, And Contracts
+## Expected Research Artifacts And Contracts
 
-- Updated research deliverables and `planning-analysis-report.md`
+- Updated research deliverables and `research-methodology-and-evidence-contract.md`
 - Potentially updated `MemoryBank/Overview/technical-overview.md`
 - Documentation contract: approved conclusions only; public architecture/package/roadmap proposals remain approval-gated.
 - Public code entry points: Not applicable.
 
-## Verification Intent
+## Research Validation Intent
 
 Use every research evidence label from `FeatureTasks.md`, culminating in `documentation-consistency-review` and `manual-review-ready`.
 
@@ -85,14 +84,23 @@ Use every research evidence label from `FeatureTasks.md`, culminating in `docume
 
 A completed acceptance ledger, audit findings/resolutions, approved technical-overview diff, and an explicit owner-approval proposal list.
 
-## Quality Gate Evidence
+## Research Review Evidence
 
 | Gate | Decision | Evidence / Justification |
 | --- | --- | --- |
-| Changed files | missing | Implementation worker must record every corrected research file, planning artifact, and technical overview path changed in the audit. |
+| Changed files | recorded | The complete research package and addenda, acceptance ledger, phase ledgers, closure report, and `MemoryBank/Overview/technical-overview.md`. |
 | Tests | not applicable | Testing-polish scope audits evidence and documentation; it changes no executable behavior. |
 | Gherkin/Playwright E2E | not applicable | No browser behavior is implemented; this phase verifies that future browser evidence is planned rather than falsely claimed. |
-| Code review | not applicable | Testing-polish scope is research/documentation-only; the persisted acceptance ledger and owner review provide review evidence. |
+| Research review | passed | `research-audit-and-closure-report.md` records provenance, coverage, traceability, workload, comparability, and consistency audits. |
+
+## Manual Phase Completion Evidence
+
+Every FEAT and EPIC row is now `EVIDENCED` or explicitly `DEFERRED` with owner
+and completion condition. The approved Overview request was applied under
+`Competitive research synthesis (FEAT-001, 2026-07-15)`. Nine changes to public
+architecture/package/roadmap documents and nine follow-up candidates remain
+visible and unapproved. Candidate gate criteria are structurally satisfied,
+but approval-dependent rows remain deferred rather than falsely closed.
 
 ## Acceptance Criteria
 

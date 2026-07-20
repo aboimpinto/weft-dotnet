@@ -1,25 +1,25 @@
-# Phase 5 - User Interface
+# Phase 5 - Browser Experience and Accessibility Criteria
 
-**Status:** PENDING
+**Status:** COMPLETED
 **Started:** -
-**Completed:** -
+**Completed:** 2026-07-15
 **Duration:** -
-**Primary Agent:** -
-**Primary Model:** -
-**Recommended Agent:** Implementation Agent
-**Recommended Model:** OpenAI Codex Terra (`gpt-5.6-terra`)
+**Work Type:** R&D / Documentation Spike
+**Execution Mode:** Manual research in the active agent conversation
+**Research Owner:** Paulo Aboim Pinto with the active agent
 **Estimated Human Time:** 3h
 **Estimated AI Time:** 1h
 
-## Routing Rationale
+## Research Rationale
 
-The UI work is an inspectable, framework-neutral acceptance specification rather than an implemented frontend. Implementation Agent can preserve parity across HTML-first, hydrated, and client-rendered models; `gpt-5.6-terra` remains the FEAT default model.
+This phase defines observable browser, accessibility, resilience, and
+interaction criteria for the shared reference workload. It does not implement
+a user interface.
 
-## Routing Decision History
+## Historical Generation Record
 
-- `2026-07-15T07:14:33Z` — **Start-Feature Post-Process Agent** selected **Implementation Agent / OpenAI Codex Terra (`gpt-5.6-terra`)** as the initial route. Expected impact: testable accessibility and browser observables without creating framework-specific behavior or tests.
-
-Any later override must append, not replace, an entry containing previous route, selected route, decision maker, timestamp, reason, and expected impact.
+- Hepha generated the original skeleton on 2026-07-15. The former development
+  routing is historical and does not turn this phase into UI implementation.
 
 ## Objective
 
@@ -27,7 +27,7 @@ Complete the reference application's inspectable UI and accessibility acceptance
 
 ## Source Context Used
 
-- `planning-analysis-report.md`: `## Reference Workload Equivalence Rules` and `## Benchmark Comparability Gate`
+- `research-methodology-and-evidence-contract.md`: `## Reference Workload Equivalence Rules` and `## Benchmark Comparability Gate`
 - `reference-application-spec.md`: route, role, failure, partial-update, and local-interaction sections
 - `FeatureDescription.md`: shared reference application and accessibility requirements
 - Weft architecture: HTML durability, explicit regions, and browser boundary
@@ -43,18 +43,18 @@ Complete the reference application's inspectable UI and accessibility acceptance
 
 ## Phase Task Ledger
 
-- [ ] Read the Phase 1 planning handoff and the Phase 4 reference workload before adding UI acceptance detail.
-- [ ] Add semantic HTML, visual, responsive, keyboard/focus, live-region, metadata, error, and not-found clauses (Concrete Task 1).
-- [ ] Define normal and failure-state observables from initial load through capability failure (Concrete Task 2).
-- [ ] Define canonical DOM ownership and adapter boundaries (Concrete Task 3).
-- [ ] Define sustained-local activation, offline/local behavior, recovery, disposal, and memory-measurement boundary (Concrete Task 4).
-- [ ] Define future browser/accessibility/security evidence categories and fixture names without creating test/source files (Concrete Task 5).
-- [ ] Verify equal UI expectations across rendering approaches (Concrete Task 6).
-- [ ] Validation gate: complete `reference-workload-review` and `documentation-consistency-review`; record the updated specification path.
-- [ ] Review follow-up: resolve parity or observability findings before Phase 6 consumes the frozen UI contract.
-- [ ] Finalization: update this ledger and Hepha task state, then hand off UI observables to Phase 6.
+- [x] Read the Phase 1 planning handoff and the Phase 4 reference workload before adding UI acceptance detail.
+- [x] Add semantic HTML, visual, responsive, keyboard/focus, live-region, metadata, error, and not-found clauses (Concrete Task 1).
+- [x] Define normal and failure-state observables from initial load through capability failure (Concrete Task 2).
+- [x] Define canonical DOM ownership and adapter boundaries (Concrete Task 3).
+- [x] Define sustained-local activation, offline/local behavior, recovery, disposal, and memory-measurement boundary (Concrete Task 4).
+- [x] Define future browser/accessibility/security evidence categories and fixture names without creating test/source files (Concrete Task 5).
+- [x] Verify equal UI expectations across rendering approaches (Concrete Task 6).
+- [x] Validation gate: complete `reference-workload-review` and `documentation-consistency-review`; record the updated specification path.
+- [x] Review follow-up: resolve parity or observability findings before Phase 6 consumes the frozen UI contract.
+- [x] Finalization: update this research ledger and record the manual handoff, then hand off UI observables to Phase 6.
 
-## Hepha Task State
+## Historical Hepha Task State (Non-Authoritative)
 
 | Ledger item | State | Started | Completed | Duration |
 | --- | --- | --- | --- | --- |
@@ -69,13 +69,13 @@ Complete the reference application's inspectable UI and accessibility acceptance
 | Review follow-up | NOT_STARTED | - | - | - |
 | Finalization | NOT_STARTED | - | - | - |
 
-## Expected Files, Components, And Contracts
+## Expected Research Artifacts And Contracts
 
 - Updated `reference-application-spec.md`
 - UI contract: semantic landmarks, focus/history/live-region rules, visual states, responsive expectations, DOM ownership, and adapter boundary.
 - Public code entry points: Not applicable; future implementations own their framework-specific entry points.
 
-## Verification Intent
+## Research Validation Intent
 
 Use `reference-workload-review` and `documentation-consistency-review`; future UI implementation will require `ui-tests` and accessibility evidence through the public browser behavior, not helper-only coverage.
 
@@ -83,14 +83,23 @@ Use `reference-workload-review` and `documentation-consistency-review`; future U
 
 An inspectable UI acceptance section with all normal and failure states, plus an explicit future evidence plan for accessibility and browser behavior.
 
-## Quality Gate Evidence
+## Research Review Evidence
 
 | Gate | Decision | Evidence / Justification |
 | --- | --- | --- |
-| Changed files | missing | Implementation worker must record the reference specification and planning artifact paths updated by the UI-contract work. |
+| Changed files | recorded | Browser/accessibility clauses in `reference-application-spec.md` and this phase ledger. |
 | Tests | not applicable | UI-contract scope plans future acceptance tests but changes no executable UI. |
 | Gherkin/Playwright E2E | not applicable | No browser UI is implemented in this research phase; future reference implementations must supply browser evidence. |
-| Code review | not applicable | UI-contract scope is documentation-only; independent reference-workload review is required before Phase 6. |
+| Research review | passed | The specification's parity, accessibility, DOM-ownership, and failure-state clauses pass the reference-workload review. |
+
+## Manual Phase Completion Evidence
+
+The frozen RA-1 contract defines semantic landmarks, responsive behavior,
+keyboard/focus/history rules, live announcements, error/loading/not-found
+states, canonical server and capability DOM ownership, activation failure,
+recovery/disposal, and future public-browser evidence categories. It claims no
+Playwright, accessibility, or browser execution result because no reference
+implementation was built in this FEAT.
 
 ## Acceptance Criteria
 

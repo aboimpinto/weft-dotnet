@@ -1,25 +1,25 @@
-# Phase 0 - Health Check
+# Phase 0 - Research Baseline
 
 **Status:** COMPLETED
 **Started:** -
 **Completed:** -
 **Duration:** -
-**Primary Agent:** -
-**Primary Model:** -
-**Recommended Agent:** Implementation Agent
-**Recommended Model:** OpenAI Codex Terra (`gpt-5.6-terra`)
+**Work Type:** R&D / Documentation Spike
+**Execution Mode:** Manual research in the active agent conversation
+**Research Owner:** Paulo Aboim Pinto with the active agent
 **Estimated Human Time:** 1h
 **Estimated AI Time:** 30m
 
-## Routing Rationale
+## Research Rationale
 
-This is a cross-platform research baseline and repository-fact inventory, not a .NET runtime change. Implementation Agent is the best fit for preserving the evidence boundary across the five platforms; `gpt-5.6-terra` is the FEAT default implementation model.
+This baseline establishes what Weft implements now, what remains a target, which
+research artifacts are missing, and which evidence rules the comparison needs.
 
-## Routing Decision History
+## Historical Generation Record
 
-- `2026-07-15T07:14:33Z` — **Start-Feature Post-Process Agent** selected **Implementation Agent / OpenAI Codex Terra (`gpt-5.6-terra`)** as the initial route. Expected impact: a reproducible baseline without treating current-Weft source facts as target capability.
-
-Any later override must append, not replace, an entry containing previous route, selected route, decision maker, timestamp, reason, and expected impact.
+- On 2026-07-15 Hepha generated this file and completed the baseline work using
+  its development-task vocabulary. That route is historical and is not an
+  instruction to continue this FEAT through Hepha.
 
 ## Objective
 
@@ -58,7 +58,7 @@ health check.
 | Production layout | `src/Weft.Abstractions/` holds feature/route/action/execution metadata; `src/Weft.Generator/` holds `WeftFeatureManifestGenerator`; `src/Weft.Server/` holds explicit manifest registration and endpoint mapping. `examples/starter-html/` contains the runnable feature and web host; the other example directories are specifications/planned examples. |
 | Baseline documents | Product and current-state inputs are `README.md`, `docs/architecture.md`, `docs/package-ecosystem.md`, `docs/roadmap.md`, `docs/examples.md`, and `MemoryBank/Overview/technical-overview.md`. They consistently describe a runnable server-only foundation and label enhanced actions, browser C#, asset pipeline/capability loading, and npm integration as planned rather than implemented. |
 | Existing test coverage | `tests/Weft.Generator.Tests/WeftFeatureManifestGeneratorTests.cs` covers manifest generation and diagnostics `WFT001`/`WFT009`; `tests/Weft.Server.Tests/WeftEndpointRouteBuilderExtensionsTests.cs` covers rejection of route/manifest mismatch; `tests/Weft.Examples.StarterHtml.Tests/TasksPageTests.cs` covers HTML without scripts or a browser runtime, antiforgery rejection, post/redirect/get, and CSS serving without Node. The inventory found eight xUnit facts across those three projects. |
-| Target feature folder | `MemoryBank/Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/` contains `FeatureDescription.md`, `FeatureTasks.md`, and phase documents `phase-0-health-check.md` through `phase-8-final-checkpoint.md`. `planning-analysis-report.md` and the seven research outputs do not yet exist; their production starts in later planned phases. |
+| Target feature folder | `MemoryBank/Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/` contains `FeatureDescription.md`, `FeatureTasks.md`, and phase documents `phase-0-research-baseline.md` through `phase-8-research-closure-and-follow-up.md`. `research-methodology-and-evidence-contract.md` and the seven research outputs do not yet exist; their production starts in later planned phases. |
 
 This inventory is an input to Phase 1 only. Current-Weft capability claims must continue to cite source and tests directly; roadmap descriptions in the baseline documents are hypotheses, not implementation evidence.
 
@@ -89,7 +89,7 @@ no active LessonsLearned rules or prior code-review prevention rules to apply.
 **Verified 2026-07-15.** `FeatureDescription.md` defines seven requested
 outputs: six research documents plus an approved, evidence-labelled update to
 `MemoryBank/Overview/technical-overview.md`. The canonical
-`planning-analysis-report.md` is Phase 1's cross-phase contract and is not a
+`research-methodology-and-evidence-contract.md` is Phase 1's cross-phase contract and is not a
 seventh substitute for the required output list. None of the seven output files
 exists yet, which is expected before their producer phases begin.
 
@@ -149,7 +149,7 @@ silently carrying this snapshot forward.
 
 **Recorded 2026-07-15.** This register records health-check constraints, not
 platform capability conclusions. Phase 1 must transfer these controls into the
-canonical `planning-analysis-report.md`; Phases 2–8 must apply them to every
+canonical `research-methodology-and-evidence-contract.md`; Phases 2–8 must apply them to every
 consumer artifact.
 
 | Risk | Observed baseline evidence | Required control and Phase 1 handoff | Effect if unresolved |
@@ -158,10 +158,10 @@ consumer artifact.
 | Official documentation and package maturity drift; “current stable” is time-bound. | The Blazor primary URL explicitly targets `aspnetcore-10.0`; Next.js and Angular overview URLs are rolling documentation paths; the accessed TanStack Start `/v0` page identifies Start as `RC`. These labels may change independently of this repository. | For each platform and each evaluated TanStack supporting package, record the source-observed version or maturity status together with the access date. Do not infer a stable release from an unversioned URL, and do not revise an earlier conclusion without a new dated ledger row and an explicit supersession note. | A capability, support, or maturity claim may be incorrectly presented as contemporaneous or stable. |
 | Evidence-grade boundaries can turn product positioning, roadmap intent, or anecdote into a capability/pain claim. | Current-Weft repository source and tests are direct implementation evidence; `README.md`, architecture, package-policy, roadmap, and technical-overview target statements are hypotheses. The feature Evidence Policy requires Grade A for platform capabilities and says Grade D is only a lead. | Phase 1 must define the canonical conclusion labels and source-row schema. Phase 2 accepts capability cells only with Grade A evidence; Phase 3 records pain triggers, affected workload/team, consequence, workaround and cost, severity, and confidence. Grade B–D material must retain its grade and limitation; Grade D cannot establish a requirement without corroboration. A Grade-A target document proves intent, never current implementation. | The comparison becomes advocacy or misstates planned Weft behavior as implemented behavior. |
 | Cross-vendor benchmark conclusions are invalid without an equivalent workload and reproducible measurement conditions. | No reference application, frozen fixture set, benchmark methodology, or reproduced cross-platform measurements exists yet. EPIC-001 prohibits comparison across different workloads, hardware, deployment topology, runtime versions, or cache state; FeatureDescription also requires identical production configuration and database/network fixtures. | Phases 4–5 must freeze the shared workload, seeded data, roles, journeys, failure fixtures, security assumptions, visual acceptance, and interaction placement. Phase 6 must define pinned hardware/runtime/framework versions, production configuration, cold/warm states, collection method, and reporting schema before measurements. Until then, performance/security/competitive numbers remain absent or explicitly labelled `Hypothesis`; external numbers may inform a lead but cannot populate a side-by-side result. | Performance requirements or market claims would be incomparable and cannot be promoted to Must/Should evidence. |
-| The local health-check and feature artifacts are untracked at the recorded repository baseline. | `git status --short --branch` on 2026-07-15 reports `?? MemoryBank/` and `?? logs/`; all seven later output paths and `planning-analysis-report.md` are absent before their planned producer phases. | Treat this phase document as local workflow evidence, not as proof that the committed baseline contains it. Before a later review/finalization claim, inspect the owning repository status and ensure the required artifacts are durable through the normal focused commit workflow; do not invent output evidence before its producer phase. | Reviewers or later phases could rely on local-only artifacts or claim a deliverable exists before it has been produced. |
+| The local health-check and feature artifacts are untracked at the recorded repository baseline. | `git status --short --branch` on 2026-07-15 reports `?? MemoryBank/` and `?? logs/`; all seven later output paths and `research-methodology-and-evidence-contract.md` are absent before their planned producer phases. | Treat this phase document as local workflow evidence, not as proof that the committed baseline contains it. Before a later review/finalization claim, inspect the owning repository status and ensure the required artifacts are durable through the normal focused commit workflow; do not invent output evidence before its producer phase. | Reviewers or later phases could rely on local-only artifacts or claim a deliverable exists before it has been produced. |
 
 **Phase 1 handoff.** Start by copying these controls—not framework conclusions—into
-`planning-analysis-report.md`. Its source ledger, version policy, evidence
+`research-methodology-and-evidence-contract.md`. Its source ledger, version policy, evidence
 rules, and benchmark-comparability gate must keep each risk visible to the
 producer phases. No risk is resolved merely because a URL was reachable during
 this Phase 0 check.
@@ -172,7 +172,7 @@ this Phase 0 check.
 this phase has a direct repository source or test path, while enhanced actions,
 browser C#, and lazy capability loading remain target-only architecture or
 roadmap hypotheses. It also reconfirmed the explicit absence of
-`EpicAcceptanceTests.md`, `planning-analysis-report.md`, and all six
+`EpicAcceptanceTests.md`, `research-methodology-and-evidence-contract.md`, and all six
 future-producer research documents; no missing input was silently treated as
 coverage.
 
@@ -204,12 +204,12 @@ FEAT-001, so there is no reviewer finding to resolve. The follow-up instead
 re-audited the Phase 0 source paths, documented absences, and Phase 1 producer
 preconditions. All 22 cited current-Weft, source-document, test, and EPIC paths
 remain present. `EpicAcceptanceTests.md` and the canonical
-`planning-analysis-report.md` remain absent; neither absence is evidence of a
+`research-methodology-and-evidence-contract.md` remain absent; neither absence is evidence of a
 capability or acceptance test.
 
 | Missing input or risk | Phase 0 disposition | Explicit Phase 1 handoff | Consumer boundary |
 | --- | --- | --- | --- |
-| Canonical planning artifact and its nine required control headings | Expected absence: Phase 1 has not created `planning-analysis-report.md` or its required headings yet. | Create the canonical file and all nine headings named in Phase 1 Concrete Task 4 before releasing any consumer. | Phases 2–8 must read the completed artifact; no phase may invent a replacement schema. |
+| Canonical planning artifact and its nine required control headings | Expected absence: Phase 1 has not created `research-methodology-and-evidence-contract.md` or its required headings yet. | Create the canonical file and all nine headings named in Phase 1 Concrete Task 4 before releasing any consumer. | Phases 2–8 must read the completed artifact; no phase may invent a replacement schema. |
 | EPIC acceptance scenarios | Confirmed absent: no `EpicAcceptanceTests.md` exists. | Record this absence in `## FEAT And EPIC Acceptance Evidence Ledger`; map EPIC success criteria to research deliverables instead of inventing Gherkin, browser, or executable coverage. | Phase 7 owns criteria-to-deliverable evidence; any browser implementation remains a future evidence-gated FEAT. |
 | Related/follow-up FEAT and design artifacts | Confirmed absent. | Preserve the absence and do not assume an implementation consumer or approved design. | Phases 4–5 own the framework-neutral reference workload and UI clauses; Phase 7 may propose only evidence-gated follow-up FEAT candidates. |
 | Active LessonsLearned rules | Confirmed absent at this review. | Re-inspect `MemoryBank/LessonsLearned/` before starting Phase 1 and apply any rules added after this snapshot. | Later workers must repeat that pre-work check; absence does not authorize inventing rules or coverage. |
@@ -233,7 +233,7 @@ research evidence.
 14 representative source, test, document, and EPIC paths that anchor the Phase
 0 fact/hypothesis boundary. All were present. It also confirmed the expected
 absence of `EpicAcceptanceTests.md` and the Phase 1-owned
-`planning-analysis-report.md`, exactly seven already-completed bootstrap ledger
+`research-methodology-and-evidence-contract.md`, exactly seven already-completed bootstrap ledger
 items, the single Hepha-owned finalization item, and a whitespace-clean
 repository diff (`git diff --check`). The repository still reports untracked
 `MemoryBank/` and `logs/`; this remains the documented durability risk and is
@@ -242,12 +242,12 @@ not represented as committed-baseline evidence.
 **Phase 1 handoff.** The reviewed baseline is ready for Phase 1 to consume.
 Phase 1 must use Tasks 2–5 and 7 as its input record, re-inspect
 `MemoryBank/LessonsLearned/`, and create the canonical
-`planning-analysis-report.md` before releasing a consumer phase. It must carry
+`research-methodology-and-evidence-contract.md` before releasing a consumer phase. It must carry
 forward the explicit artifact absences, current-versus-target Weft distinction,
 source/version controls, and no-incomparable-benchmark rule. No new runtime,
 acceptance-test, or public-document claim was introduced by this finalization.
 
-The finalization checkbox and its `## Hepha Task State` row intentionally
+The finalization checkbox and its `## Historical Hepha Task State (Non-Authoritative)` row intentionally
 remain Hepha-owned until the orchestrator records this worker result.
 
 ## Phase Task Ledger
@@ -261,7 +261,7 @@ remain Hepha-owned until the orchestrator records this worker result.
 - [x] Review follow-up: resolve or explicitly hand off every missing input/risk to Phase 1; do not invent evidence.
 - [x] Finalization: update this ledger and Hepha task state, then hand the reviewed baseline to Phase 1.
 
-## Hepha Task State
+## Historical Hepha Task State (Non-Authoritative)
 
 | Task ID | Task | State | Started | Completed | Duration |
 | --- | --- | --- | --- | --- | --- |
@@ -274,12 +274,12 @@ remain Hepha-owned until the orchestrator records this worker result.
 | phase-0.phase-task-ledger.review-follow-up-resolve-or-explicitly-hand-off-every-missing-input-risk | Review follow-up: resolve or explicitly hand off every missing input/risk to Phase 1; do not invent evidence. | COMPLETED | 2026-07-15T07:39:02.853Z | 2026-07-15T07:41:43.432Z | 2m 41s |
 | phase-0.phase-task-ledger.finalization-update-this-ledger-and-hepha-task-state-then-hand-the-revie | Finalization: update this ledger and Hepha task state, then hand the reviewed baseline to Phase 1. | COMPLETED | 2026-07-15T07:41:43.520Z | 2026-07-15T07:44:28.348Z | 2m 45s |
 
-## Expected Files, Components, And Contracts
+## Expected Research Artifacts And Contracts
 
-- Phase-local baseline/risk notes or equivalent entries in `planning-analysis-report.md` once Phase 1 begins.
+- Phase-local baseline/risk notes or equivalent entries in `research-methodology-and-evidence-contract.md` once Phase 1 begins.
 - No public runtime, data, API, UI, or integration contract changes.
 
-## Verification Intent
+## Research Validation Intent
 
 Use `research-baseline-review` to ensure current-Weft evidence comes from the repository and that no missing linked artifact is silently ignored.
 
@@ -287,11 +287,11 @@ Use `research-baseline-review` to ensure current-Weft evidence comes from the re
 
 Baseline inventory, source-document list, deliverable inventory, and explicit absence/presence record for EPIC acceptance scenarios and design artifacts.
 
-## Quality Gate Evidence
+## Research Review Evidence
 
 | Gate | Decision | Evidence / Justification |
 | --- | --- | --- |
-| Changed files | not applicable | Health-check scope only; no production file changed. `Phases/phase-0-health-check.md` records the completed `research-baseline-review` and finalization narrative; `FeatureTasks.md` records its Phase 0 traceability link. |
+| Changed files | not applicable | Health-check scope only; no production file changed. `Phases/phase-0-research-baseline.md` records the completed `research-baseline-review` and finalization narrative; `FeatureTasks.md` records its Phase 0 traceability link. |
 | Tests | not applicable | No executable behavior changed. `research-baseline-review` Retry 1 passed as a static source/provenance, expected-absence, ledger-precondition, and whitespace audit; `phase-0-finalization-audit` also passed for cited baseline paths, expected absences, ledger boundary, and `git diff --check`. |
 | Gherkin/Playwright E2E | not applicable | Health-check scope only; no browser behavior is introduced and EPIC-001 has no `EpicAcceptanceTests.md`. |
 | Code review | not applicable | Health-check scope only; no code or executable documentation contract is changed. |
@@ -314,12 +314,12 @@ Assumes the repository baseline remains accessible. Stop and report if required 
 
 **2026-07-15 workflow recovery.** The failed continuation was a lifecycle reconciliation conflict: the final worker returned its Phase 0 handoff while its final task remained intentionally Hepha-owned, then deterministic reconciliation correctly recorded all eight checked ledger items and this phase as `COMPLETED`. The FeatureTasks phase-summary row is aligned to that settled state. Do not rerun Phase 0; begin Phase 1 from its first unchecked ledger task.
 
-## Hepha Phase State
+## Historical Hepha Phase State (Non-Authoritative)
 
 - **Status:** COMPLETED
 - **Completed At:** 2026-07-15T07:44:28.359Z
 - **Completion Provenance:** Deterministic phase-state reconciliation from checked phase-document tasks and settled Quality Gate Evidence; worker final prose was not used.
 
-## Hepha State Reconciliation Audit
+## Historical Hepha State Reconciliation Audit
 
 - 2026-07-15T07:44:28.359Z | Phase 0 promoted to COMPLETED | checked phase-document tasks and settled quality gates verified.

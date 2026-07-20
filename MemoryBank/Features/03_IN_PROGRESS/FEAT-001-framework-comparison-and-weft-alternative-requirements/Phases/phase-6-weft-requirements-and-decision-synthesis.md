@@ -1,25 +1,24 @@
-# Phase 6 - Integration
+# Phase 6 - Weft Requirements and Decision Synthesis
 
-**Status:** PENDING
+**Status:** COMPLETED
 **Started:** -
-**Completed:** -
+**Completed:** 2026-07-15
 **Duration:** -
-**Primary Agent:** -
-**Primary Model:** -
-**Recommended Agent:** Implementation Agent
-**Recommended Model:** OpenAI Codex Terra (`gpt-5.6-terra`)
+**Work Type:** R&D / Documentation Spike
+**Execution Mode:** Manual research in the active agent conversation
+**Research Owner:** Paulo Aboim Pinto with the active agent
 **Estimated Human Time:** 6h
 **Estimated AI Time:** 3h
 
-## Routing Rationale
+## Research Rationale
 
-This is controlled synthesis of matrix, pain, workload, and benchmark evidence into requirements and decisions; no runtime integration is implemented. Implementation Agent using the default `gpt-5.6-terra` model best preserves traceability and the comparable-benchmark gate across those inputs.
+This phase converts the capability, pain, and reference-workload evidence into
+ranked Weft requirements, benchmark rules, and explicit product decisions.
 
-## Routing Decision History
+## Historical Generation Record
 
-- `2026-07-15T07:14:33Z` — **Start-Feature Post-Process Agent** selected **Implementation Agent / OpenAI Codex Terra (`gpt-5.6-terra`)** as the initial route. Expected impact: a reproducible methodology and requirements catalog that does not fabricate performance conclusions.
-
-Any later override must append, not replace, an entry containing previous route, selected route, decision maker, timestamp, reason, and expected impact.
+- Hepha generated the original skeleton on 2026-07-15. The former development
+  routing is historical; no runtime integration is part of this phase.
 
 ## Objective
 
@@ -27,7 +26,7 @@ Integrate the capability, pain, and shared-workload evidence into a reproducible
 
 ## Source Context Used
 
-- `planning-analysis-report.md`: `## Benchmark Comparability Gate`, `## Requirement Ranking Rules`, and `## Decision And Approval Boundaries`
+- `research-methodology-and-evidence-contract.md`: `## Benchmark Comparability Gate`, `## Requirement Ranking Rules`, and `## Decision And Approval Boundaries`
 - `framework-comparison-report.md`
 - `praised-qualities-and-pains.md`
 - `reference-application-spec.md`, including UI observables
@@ -45,19 +44,19 @@ Integrate the capability, pain, and shared-workload evidence into a reproducible
 
 ## Phase Task Ledger
 
-- [ ] Read the Phase 1 planning handoff and Phase 2–5 evidence/contract handoffs before synthesis.
-- [ ] Create the pinned-environment, fixture, state, collection, and reporting benchmark methodology (Concrete Task 1).
-- [ ] Include all required measurement categories and boundaries (Concrete Task 2).
-- [ ] State and enforce comparability exclusions (Concrete Task 3).
-- [ ] Create the deduplicated, traceable Must/Should/Could/Won't requirements catalog (Concrete Task 4).
-- [ ] Apply the comparable-benchmark gate to performance requirements (Concrete Task 5).
-- [ ] Create the controlled mechanism/pain decision and gap backlog (Concrete Task 6).
-- [ ] Propose only bounded, approval-gated follow-up FEAT candidates (Concrete Task 7).
-- [ ] Validation gate: complete `benchmark-comparability-review` and `decision-traceability-audit`; record all three deliverable paths.
-- [ ] Review follow-up: resolve missing upstream links, unbounded follow-ups, or benchmark-gate violations before Phase 7 audit.
-- [ ] Finalization: update this ledger and Hepha task state, then hand off the synthesis package to Phase 7.
+- [x] Read the Phase 1 planning handoff and Phase 2–5 evidence/contract handoffs before synthesis.
+- [x] Create the pinned-environment, fixture, state, collection, and reporting benchmark methodology (Concrete Task 1).
+- [x] Include all required measurement categories and boundaries (Concrete Task 2).
+- [x] State and enforce comparability exclusions (Concrete Task 3).
+- [x] Create the deduplicated, traceable Must/Should/Could/Won't requirements catalog (Concrete Task 4).
+- [x] Apply the comparable-benchmark gate to performance requirements (Concrete Task 5).
+- [x] Create the controlled mechanism/pain decision and gap backlog (Concrete Task 6).
+- [x] Propose only bounded, approval-gated follow-up FEAT candidates (Concrete Task 7).
+- [x] Validation gate: complete `benchmark-comparability-review` and `decision-traceability-audit`; record all three deliverable paths.
+- [x] Review follow-up: resolve missing upstream links, unbounded follow-ups, or benchmark-gate violations before Phase 7 audit.
+- [x] Finalization: update this research ledger and record the manual handoff, then hand off the synthesis package to Phase 7.
 
-## Hepha Task State
+## Historical Hepha Task State (Non-Authoritative)
 
 | Ledger item | State | Started | Completed | Duration |
 | --- | --- | --- | --- | --- |
@@ -73,15 +72,16 @@ Integrate the capability, pain, and shared-workload evidence into a reproducible
 | Review follow-up | NOT_STARTED | - | - | - |
 | Finalization | NOT_STARTED | - | - | - |
 
-## Expected Files, Components, And Contracts
+## Expected Research Artifacts And Contracts
 
 - `benchmark-methodology.md`
 - `weft-alternative-requirements.md`
 - `weft-gap-and-decision-backlog.md`
+- `installation-and-bootstrap-strategy.md` (owner-requested synthesis addendum)
 - Integration contract: shared workload feeds measurements; evidence/pain findings feed requirements; decisions feed only approved follow-ups.
 - Public code entry points: Not applicable; no integration runtime is implemented.
 
-## Verification Intent
+## Research Validation Intent
 
 Use `benchmark-comparability-review` and `decision-traceability-audit` to ensure every requirement and decision has valid upstream evidence and no performance conclusion bypasses the gate.
 
@@ -89,14 +89,26 @@ Use `benchmark-comparability-review` and `decision-traceability-audit` to ensure
 
 Complete methodology, ranked catalog, decision backlog, and traceability links to matrix, pain catalog, and reference specification.
 
-## Quality Gate Evidence
+## Research Review Evidence
 
 | Gate | Decision | Evidence / Justification |
 | --- | --- | --- |
-| Changed files | missing | Implementation worker must list the methodology, requirement catalog, decision backlog, and planning artifact paths updated by this phase. |
+| Changed files | recorded | `benchmark-methodology.md`, `weft-alternative-requirements.md`, `weft-gap-and-decision-backlog.md`, `installation-and-bootstrap-strategy.md`, and this phase ledger. |
 | Tests | not applicable | Integration scope composes research documentation and does not change executable integration behavior. |
 | Gherkin/Playwright E2E | not applicable | Integration scope defines future measurement and browser evidence but implements no browser behavior. |
-| Code review | not applicable | Integration scope is documentation-only; comparability and decision-traceability audits are the required phase review. |
+| Research review | passed | The methodology's comparability review and both synthesis deliverables' traceability audits pass. |
+
+## Manual Phase Completion Evidence
+
+BM-1 pins cohorts, fixtures, cold/warm states, environment fields, measurement
+categories, exclusions, sampling, and reporting while leaving results
+`METHODOLOGY_ONLY`. WR-1 contains fifteen Must, eight Should, five Could, and
+seven Won't/Non-goal proposals. WD-1 maps all 26 quality mechanisms and 25
+pains, records the current gap, and proposes nine bounded but unauthorized
+follow-up candidates. DNS-1 extends the synthesis with Development error and
+native WebView shell contracts. IBS-1 adds the official installation comparison
+and verified bootstrap/local-tool/restore/update/removal proposal, expanding
+CAND-06 without authorizing implementation.
 
 ## Acceptance Criteria
 

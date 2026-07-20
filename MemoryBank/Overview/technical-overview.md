@@ -5,7 +5,8 @@
 This document describes Weft from a technical and architectural point of view.
 It is working memory for product and engineering decisions, not a replacement
 for the public project `README.md` and not a promise that planned functionality
-already exists.
+already exists. Use the [Overview index](README.md) for the durable topic
+summaries produced from FEAT-001.
 
 ## Executive summary
 
@@ -384,6 +385,77 @@ be reused by multiple projects. NuGet can also lock the complete dependency
 closure in `packages.lock.json`. Weft should build on those mechanisms for .NET
 code rather than invent another .NET package manager.
 
+This does not mean that Weft is dependency-free or that every Weft application
+has fewer packages than every Node application. The useful distinction is a
+smaller mandatory toolchain and dependency ecosystems that are proportional to
+selected capabilities:
+
+| Potential setup | Required ecosystems and likely project footprint |
+| --- | --- |
+| Pure Weft | .NET SDK plus NuGet; no Node, npm, or `node_modules`. |
+| Weft with one direct CSS asset | .NET SDK, NuGet, and one immutable hash-verified asset; still no Node or `node_modules`. |
+| Weft with JavaScript ecosystem integration | .NET SDK, NuGet, and one selected npm-compatible package manager/lockfile; `node_modules` may exist and a compatible Node runtime may be required by the chosen tooling. |
+| Weft with Tauri | .NET SDK, NuGet, Rust, and native target tooling; Android and iOS add their platform-specific SDK/build/signing requirements. |
+
+NuGet also has transitive packages, supply-chain risk, build targets, analyzers,
+source generators, caches, intermediate output, and disk cost. Build-time
+package code remains a trust boundary. The structural difference is that
+`PackageReference` normally restores package contents into a shared global
+directory rather than expanding the complete package graph into every
+project's `node_modules`. Local `obj`, `bin`, generated, and publish output
+still exist, and the shared cache still occupies disk.
+
+The defensible promise is therefore not “Weft has no dependencies” or even
+“Weft always has fewer dependencies.” It is:
+
+> **Weft does not make a C# web application inherit the Node dependency
+> ecosystem unless the application selects a capability that needs it.**
+
+> **Dependencies are proportional to the capabilities selected by the
+> application.**
+
+### Installation and bootstrap strategy
+
+Installing Weft itself and restoring an application's dependencies are
+different trust and lifecycle operations. The proposed installation contract is
+documented in
+[FEAT-001 Weft Installation and Bootstrap Strategy](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/installation-and-bootstrap-strategy.md).
+
+The intended pure-mode experience has one mandatory prerequisite: a supported
+.NET SDK. While Weft is experimental, a versioned GitHub Release downloaded by
+`wget` on Unix-like systems or `Invoke-WebRequest` on PowerShell is a sensible
+bootstrap path. The archive and signed checksum/provenance manifest must be
+downloaded and verified before the CLI is executed; piping a mutable remote
+script directly into a shell is not the canonical trust path.
+
+When `Weft.Cli` can be published reliably, a committed repository-local .NET
+tool manifest should become the recommended team and CI installation:
+
+```powershell
+dotnet tool install --local Weft.Cli --version 0.1.0
+dotnet tool restore
+dotnet weft --version
+```
+
+The identifiers and version above describe the proposed command shape, not an
+available package. A global tool may remain convenient for exploration, but it
+must not be the only workflow because two projects need to use pinned Weft
+versions side by side.
+
+Project creation should then be one explicit command such as `weft new app
+MyApp --profile html`. The pure `html` profile installs no Node runtime,
+`package.json`, JavaScript lockfile, or `node_modules`. Optional browser C#,
+JavaScript interop, Tauri, Android, and iOS profiles expose their additional
+workloads and native SDKs through `weft doctor`; the creator must not silently
+install every possible toolchain.
+
+The complete lifecycle also requires locked restore, a dry-run for adding Weft
+to an existing ASP.NET Core application, offline/mirror support, explicit
+updates and migrations, cache inspection/garbage collection, and conservative
+removal. No normal command should require administrator privileges, silently
+auto-update, enable telemetry, run undeclared install scripts, or remove shared
+SDKs and caches.
+
 ### Direct immutable asset retrieval
 
 The `wget` idea is useful as a mental model for simple browser assets: if a
@@ -717,6 +789,142 @@ It may also be the wrong direction for:
   features;
 - a workflow better served by an established JavaScript component or library;
 - a project unwilling to measure and justify the browser-runtime cost.
+
+## Competitive research synthesis (FEAT-001, 2026-07-15)
+
+The FEAT-001 investigation compared Blazor on .NET 10, Next.js 16.2.10 with
+React 19.2.7, Angular 22.0.6, the individually versioned TanStack Start,
+Router, Query, Form, Table, and Devtools packages, and Weft at commit
+`ca5bacedfa7241be6071b09ad44d8d62948c7426`. The comparison uses official
+technical sources for capability claims and keeps **Current Weft** separate
+from **Target Weft Hypothesis**.
+
+The defensible market statement is narrower and stronger than “there are no
+C# web frameworks.” Blazor, Razor Pages/MVC, DotVVM, Uno Platform,
+OpenSilver, Wisej.NET, and WebSharper all occupy adjacent territory. What is
+not occupied by a mainstream platform is Weft's proposed combination:
+vertical feature packages; C#, HTML, and CSS as the normal application
+languages; useful HTML without a mandatory client runtime; stateless
+enhancement; browser C# paid for only by sustained-local capabilities; and a
+bounded JavaScript escape hatch rather than JavaScript as the application
+foundation.
+
+The research supports these conclusions:
+
+- Blazor is the closest mainstream .NET alternative, but its component/render-
+  mode model and interactive server/WebAssembly runtimes solve a different
+  composition problem. Weft must demonstrate value through feature packaging,
+  HTML-first behavior, stateless enhancement, and explicit capability cost—not
+  through the fact that it uses C#.
+- Next.js, Angular, and the TanStack family establish a demanding baseline for
+  routing, forms, data loading, failure composition, tooling, testing,
+  deployment, and developer feedback. Avoiding TypeScript is not sufficient;
+  Weft must provide coherent C# equivalents for the relevant outcomes.
+- No evidence collected in FEAT-001 proves that Weft is faster than Node.js,
+  Blazor, or any named framework. Performance claims remain hypotheses until
+  equivalent reference implementations pass the pinned benchmark method.
+- WebAssembly is a cost, not an automatic verdict. It can slow cold activation
+  and increase download and memory use; it can also be justified for sustained
+  local interaction. Weft's proposed default therefore remains server HTML and
+  stateless actions, with browser C# activated only for declared capabilities.
+- Weft is not inherently more secure than Node.js. Its smaller default browser
+  dependency surface and ASP.NET Core integration can reduce some exposure,
+  while template encoding, authentication, authorization, antiforgery,
+  dependency integrity, JavaScript adapters, deployment, and application logic
+  still require explicit controls and conformance tests.
+- Avoiding a project-local `node_modules` tree is a legitimate pure-mode goal,
+  but it does not eliminate dependency risk or disk use. NuGet uses a shared
+  global package cache; deterministic locks, hashes, provenance, licenses,
+  lifecycle-script policy, published-output inspection, and cache accounting
+  remain necessary. A future `wget`-style direct asset source must be immutable
+  and integrity-checked, not an untracked download shortcut.
+
+The proposed alternative-readiness baseline is recorded as fifteen `Must`, eight
+`Should`, five `Could`, and seven `Won't/Non-goal` requirements. The Must set
+covers vertical feature contracts, safe HTML composition, typed routes,
+authoritative forms/actions, zero-runtime baselines, stateless enhancement,
+security, accessibility, assets, CLI workflow, JavaScript adapters, dependency
+integrity, testing, operations, and compatibility policy. These ranks remain
+research proposals until product-owner approval; they do not authorize
+implementation or public capability claims.
+
+### Development error overlay
+
+Next.js demonstrates an important developer-experience quality: in development,
+an error can be shown in the browser with its message, relevant source code
+frame, and useful stack frames. .NET already supplies exceptions, stack traces,
+symbols, source file/line information, and the ASP.NET Core Developer Exception
+Page. Weft should adapt these foundations rather than invent another exception
+model.
+
+The proposed Weft overlay maps generated routes, actions, templates, and
+browser capabilities back to user-authored C# or HTML source. In Development it
+shows the exception, relevant code frame, mapped file/line, collapsed stack,
+feature context, and trace identifier. In Production the overlay, source code,
+physical paths, editor links, and serialized stack are absent; users receive a
+friendly full-page, partial-action, or API error with a correlation identifier,
+while controlled server logs retain the detail. A request must never be able to
+turn Development diagnostics on in Production.
+
+### Desktop and mobile shell integration
+
+Electron and Electrobun are desktop shells for Windows, macOS, and Linux; they
+are not current iOS/Android deployment options. Tauri 2 supports those desktop
+systems plus Android and iOS. Capacitor is a mobile-oriented native runtime for
+web applications. Tauri's documented frontend model is a static web host and
+does not natively host SSR, which means Current Weft cannot simply be bundled
+unchanged as a fully local Tauri mobile application.
+
+Bun 1.3.14 now provides a first-party Android runtime build, which makes a
+future Electrobun Android port more plausible. It does not make Electrobun an
+Android application framework today: its official targets remain desktop and
+its open mobile work still needs the Android WebView host, lifecycle/RPC
+integration, Gradle packaging, signing, permissions, plugins, debugging, and
+release support.
+
+Weft's portability contract must not become a multi-wrapper recommendation. A
+normal product chooses one shell family that covers its required platforms and
+maintains one bridge, lifecycle model, plugin set, updater, and conformance
+suite. For Windows/Linux desktop plus Android, Tauri is the current reference.
+Electron and Electrobun are alternative providers for desktop-only products or
+future whole-product migrations, not additional wrappers used beside Tauri to
+save CI compilation time. iOS retains its separate Apple build, provisioning,
+signing, and store pipeline, while it can still consume the same Weft shell
+contract.
+
+Weft should define three explicit shell modes:
+
+1. **Hosted shell:** a WebView loads a deployed HTTPS Weft server. This is
+   closest to Current Weft but normally requires connectivity and a highly
+   restricted origin-scoped native bridge.
+2. **Bundled static/client shell:** immutable Weft HTML/CSS/assets and optional
+   browser C# are packaged in the native app while APIs remain remote. This
+   fits Tauri/Capacitor but requires a future static-shell publish profile.
+3. **Desktop sidecar:** Electron, Electrobun, or Tauri launches a loopback-only
+   packaged ASP.NET Core process and coordinates readiness, security, updates,
+   logs, and shutdown. This must not be presented as the iOS/Android design.
+
+Smooth integration requires profile-aware publishing; relative hashed assets;
+typed routes and deep links; system-browser authentication callbacks; a
+versioned least-privilege native bridge; back/safe-area/keyboard/touch and
+suspend/resume/offline contracts; coordinated `dotnet watch` plus shell
+development; and desktop/mobile conformance tests. Application authors may
+remain in C#, but native WebView APIs normally cross a small JavaScript guest
+boundary owned by the generated shell adapter. Therefore the accurate promise
+is C# application code with bounded generated interoperability, not literal
+absence of JavaScript inside every native container.
+
+The complete evidence and execution contracts are in:
+
+- [Framework comparison](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/framework-comparison-report.md)
+- [Praised qualities and pains](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/praised-qualities-and-pains.md)
+- [Reference application specification](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/reference-application-spec.md)
+- [Benchmark methodology](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/benchmark-methodology.md)
+- [Weft alternative requirements](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/weft-alternative-requirements.md)
+- [Gap and decision backlog](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/weft-gap-and-decision-backlog.md)
+- [Developer errors and native shell integration](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/developer-errors-and-native-shell-integration.md)
+- [Installation and bootstrap strategy](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/installation-and-bootstrap-strategy.md)
+- [Independent research recheck](../Features/03_IN_PROGRESS/FEAT-001-framework-comparison-and-weft-alternative-requirements/research-recheck-2026-07-20.md)
 
 ## Technical risks and open questions
 

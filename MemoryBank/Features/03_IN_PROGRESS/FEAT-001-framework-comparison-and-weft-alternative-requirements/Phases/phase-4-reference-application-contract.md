@@ -1,25 +1,24 @@
-# Phase 4 - Presentation Logic
+# Phase 4 - Reference Application Contract
 
-**Status:** PENDING
+**Status:** COMPLETED
 **Started:** -
-**Completed:** -
+**Completed:** 2026-07-15
 **Duration:** -
-**Primary Agent:** -
-**Primary Model:** -
-**Recommended Agent:** Implementation Agent
-**Recommended Model:** OpenAI Codex Terra (`gpt-5.6-terra`)
+**Work Type:** R&D / Documentation Spike
+**Execution Mode:** Manual research in the active agent conversation
+**Research Owner:** Paulo Aboim Pinto with the active agent
 **Estimated Human Time:** 4h
 **Estimated AI Time:** 2h
 
-## Routing Rationale
+## Research Rationale
 
-The phase defines a framework-neutral reference workload across server, browser, security, and integration boundaries; it does not implement a .NET component. Implementation Agent is therefore preferred for maintaining cross-platform contract equivalence, using the default `gpt-5.6-terra` model.
+This phase freezes one framework-neutral business workload so later prototypes
+and measurements compare equivalent responsibilities and user outcomes.
 
-## Routing Decision History
+## Historical Generation Record
 
-- `2026-07-15T07:14:33Z` — **Start-Feature Post-Process Agent** selected **Implementation Agent / OpenAI Codex Terra (`gpt-5.6-terra`)** as the initial route. Expected impact: a complete observable workload without selecting a framework-specific implementation strategy.
-
-Any later override must append, not replace, an entry containing previous route, selected route, decision maker, timestamp, reason, and expected impact.
+- Hepha generated the original skeleton on 2026-07-15. The former development
+  routing is retained only as history.
 
 ## Objective
 
@@ -27,7 +26,7 @@ Specify the shared modular business application so later framework implementatio
 
 ## Source Context Used
 
-- `planning-analysis-report.md`: `## Reference Workload Equivalence Rules`
+- `research-methodology-and-evidence-contract.md`: `## Reference Workload Equivalence Rules`
 - `FeatureDescription.md`: Shared Reference Application Specification
 - `framework-comparison-report.md` and `praised-qualities-and-pains.md`
 - Current Weft architecture and package policy
@@ -43,18 +42,18 @@ Specify the shared modular business application so later framework implementatio
 
 ## Phase Task Ledger
 
-- [ ] Read the Phase 1 planning handoff and prerequisite matrix/pain handoffs before defining the reference workload.
-- [ ] Define domain vocabulary, seeded data, roles, authorization, and the route/feature map (Concrete Task 1).
-- [ ] Define public routes, layouts, metadata, loading/error/not-found states, and public/protected boundaries (Concrete Task 2).
-- [ ] Define the authenticated administration workflow, validation, antiforgery, failure, and navigation observables (Concrete Task 3).
-- [ ] Define loading/mutation/cache/failure behavior and the server-owned partial-update fallback (Concrete Task 4).
-- [ ] Define sustained-local interaction and third-party JavaScript adapter boundaries with server authority (Concrete Task 5).
-- [ ] Define feature assets, deployment signals, fixture parity, and failure fixtures (Concrete Task 6).
-- [ ] Validation gate: complete `reference-workload-review` and record the specification and planning-artifact evidence.
-- [ ] Review follow-up: resolve ambiguous observable or fixture rules before Phase 5 adds UI acceptance clauses.
-- [ ] Finalization: update this ledger and Hepha task state, then hand off the frozen workload contract to Phases 5–6.
+- [x] Read the Phase 1 planning handoff and prerequisite matrix/pain handoffs before defining the reference workload.
+- [x] Define domain vocabulary, seeded data, roles, authorization, and the route/feature map (Concrete Task 1).
+- [x] Define public routes, layouts, metadata, loading/error/not-found states, and public/protected boundaries (Concrete Task 2).
+- [x] Define the authenticated administration workflow, validation, antiforgery, failure, and navigation observables (Concrete Task 3).
+- [x] Define loading/mutation/cache/failure behavior and the server-owned partial-update fallback (Concrete Task 4).
+- [x] Define sustained-local interaction and third-party JavaScript adapter boundaries with server authority (Concrete Task 5).
+- [x] Define feature assets, deployment signals, fixture parity, and failure fixtures (Concrete Task 6).
+- [x] Validation gate: complete `reference-workload-review` and record the specification and planning-artifact evidence.
+- [x] Review follow-up: resolve ambiguous observable or fixture rules before Phase 5 adds UI acceptance clauses.
+- [x] Finalization: update this research ledger and record the manual handoff, then hand off the frozen workload contract to Phases 5–6.
 
-## Hepha Task State
+## Historical Hepha Task State (Non-Authoritative)
 
 | Ledger item | State | Started | Completed | Duration |
 | --- | --- | --- | --- | --- |
@@ -69,14 +68,14 @@ Specify the shared modular business application so later framework implementatio
 | Review follow-up | NOT_STARTED | - | - | - |
 | Finalization | NOT_STARTED | - | - | - |
 
-## Expected Files, Components, And Contracts
+## Expected Research Artifacts And Contracts
 
 - `reference-application-spec.md`
 - Data contract: seeded entities, fixtures, role permissions, error fixtures, and comparable API/action outcomes.
 - UI/API/integration contract: route map, fallback action behavior, partial-update response boundary, local-capability boundary, and JavaScript adapter ownership.
 - Public code entry points: Not applicable; this is a specification phase.
 
-## Verification Intent
+## Research Validation Intent
 
 Use `reference-workload-review` to confirm that each platform can be measured against the same routes, data, roles, failures, and observable outcomes.
 
@@ -84,14 +83,22 @@ Use `reference-workload-review` to confirm that each platform can be measured ag
 
 A self-contained specification that an independent implementer can use without inventing requirements.
 
-## Quality Gate Evidence
+## Research Review Evidence
 
 | Gate | Decision | Evidence / Justification |
 | --- | --- | --- |
-| Changed files | missing | Implementation worker must record the reference specification and planning artifact paths updated in this phase. |
+| Changed files | recorded | `reference-application-spec.md` and this phase ledger. |
 | Tests | not applicable | Presentation-specification scope defines future tests but changes no executable behavior. |
 | Gherkin/Playwright E2E | not applicable | This phase plans future browser evidence and does not implement browser behavior. |
-| Code review | not applicable | Presentation-specification scope is documentation-only; reference-workload review provides the phase review. |
+| Research review | passed | The specification's `Reference Workload Audit` passes. |
+
+## Manual Phase Completion Evidence
+
+`reference-application-spec.md` freezes RA-1 Project Atlas: modules, identities,
+roles, deterministic seed volumes, 18 routes, seven journeys, twelve failure
+fixtures, security boundaries, partial-update fallback, sustained-local board
+work, a bounded JavaScript chart adapter, assets, deployment signals, and
+equivalent observable outcomes.
 
 ## Acceptance Criteria
 

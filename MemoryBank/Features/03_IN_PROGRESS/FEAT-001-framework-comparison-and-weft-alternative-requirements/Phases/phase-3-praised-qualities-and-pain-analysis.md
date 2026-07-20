@@ -1,25 +1,25 @@
-# Phase 3 - Business Logic
+# Phase 3 - Praised Qualities and Pain Analysis
 
-**Status:** PENDING
+**Status:** COMPLETED
 **Started:** -
-**Completed:** -
+**Completed:** 2026-07-15
 **Duration:** -
-**Primary Agent:** -
-**Primary Model:** -
-**Recommended Agent:** Implementation Agent
-**Recommended Model:** OpenAI Codex Terra (`gpt-5.6-terra`)
+**Work Type:** R&D / Documentation Spike
+**Execution Mode:** Manual research in the active agent conversation
+**Research Owner:** Paulo Aboim Pinto with the active agent
 **Estimated Human Time:** 6h
 **Estimated AI Time:** 3h
 
-## Routing Rationale
+## Research Rationale
 
-This evidence-interpretation phase compares platform qualities and pains without promoting preferences to facts. It needs a cross-platform research owner who can enforce the Phase 1/2 contracts, so Implementation Agent with the default `gpt-5.6-terra` route is appropriate.
+This phase evaluates what developers value and what repeatedly costs them time,
+complexity, performance, or operational effort without presenting preferences
+as facts.
 
-## Routing Decision History
+## Historical Generation Record
 
-- `2026-07-15T07:14:33Z` — **Start-Feature Post-Process Agent** selected **Implementation Agent / OpenAI Codex Terra (`gpt-5.6-terra`)** as the initial route. Expected impact: traceable pain analysis that distinguishes framework, ecosystem, hosting, application, and team causes.
-
-Any later override must append, not replace, an entry containing previous route, selected route, decision maker, timestamp, reason, and expected impact.
+- Hepha generated the original skeleton on 2026-07-15. The former development
+  routing is historical and does not govern this research phase.
 
 ## Objective
 
@@ -27,7 +27,7 @@ Turn the Phase 2 capability baseline into disciplined praised-quality and pain a
 
 ## Source Context Used
 
-- `planning-analysis-report.md`: `## Pain And Quality Analysis Rules` and `## Decision And Approval Boundaries`
+- `research-methodology-and-evidence-contract.md`: `## Pain And Quality Analysis Rules` and `## Decision And Approval Boundaries`
 - `framework-comparison-report.md`: `## Capability Matrix`
 - `FeatureDescription.md`: Praised Qualities And Pain Analysis and Evidence Policy
 - EPIC-001 guardrails and risks
@@ -43,17 +43,17 @@ Turn the Phase 2 capability baseline into disciplined praised-quality and pain a
 
 ## Phase Task Ledger
 
-- [ ] Read the Phase 1 planning handoff and Phase 2 matrix, then create the common-schema platform catalog (Concrete Task 1).
-- [ ] Record the required material praised qualities and pains for each platform, or an evidenced scope limitation (Concrete Task 2).
-- [ ] Capture quality evidence, affected workload, and preliminary Weft mechanism response (Concrete Task 3).
-- [ ] Capture each pain's trigger, consequence, workaround/cost, severity, confidence, grade, and classification (Concrete Task 4).
-- [ ] Assign the controlled Weft pain response with architectural rationale (Concrete Task 5).
-- [ ] Cross-link matrix evidence, label conclusion states, and preserve unresolved findings for Phase 6 (Concrete Task 6).
-- [ ] Validation gate: complete `source-provenance-audit` and `decision-traceability-audit`; record exact catalog and source paths.
-- [ ] Review follow-up: resolve unsupported or Grade-D-only claims by evidence, limitation, or explicit lead status before requirement synthesis.
-- [ ] Finalization: update this ledger and Hepha task state, then hand off controlled decision inputs to Phase 6.
+- [x] Read the Phase 1 planning handoff and Phase 2 matrix, then create the common-schema platform catalog (Concrete Task 1).
+- [x] Record the required material praised qualities and pains for each platform, or an evidenced scope limitation (Concrete Task 2).
+- [x] Capture quality evidence, affected workload, and preliminary Weft mechanism response (Concrete Task 3).
+- [x] Capture each pain's trigger, consequence, workaround/cost, severity, confidence, grade, and classification (Concrete Task 4).
+- [x] Assign the controlled Weft pain response with architectural rationale (Concrete Task 5).
+- [x] Cross-link matrix evidence, label conclusion states, and preserve unresolved findings for Phase 6 (Concrete Task 6).
+- [x] Validation gate: complete `source-provenance-audit` and `decision-traceability-audit`; record exact catalog and source paths.
+- [x] Review follow-up: resolve unsupported or Grade-D-only claims by evidence, limitation, or explicit lead status before requirement synthesis.
+- [x] Finalization: update this research ledger and record the manual handoff, then hand off controlled decision inputs to Phase 6.
 
-## Hepha Task State
+## Historical Hepha Task State (Non-Authoritative)
 
 | Ledger item | State | Started | Completed | Duration |
 | --- | --- | --- | --- | --- |
@@ -67,13 +67,13 @@ Turn the Phase 2 capability baseline into disciplined praised-quality and pain a
 | Review follow-up | NOT_STARTED | - | - | - |
 | Finalization | NOT_STARTED | - | - | - |
 
-## Expected Files, Components, And Contracts
+## Expected Research Artifacts And Contracts
 
 - `praised-qualities-and-pains.md`
 - Decision contract: controlled mechanism and pain-response vocabulary with traceable rationale.
 - Public code entry points: Not applicable.
 
-## Verification Intent
+## Research Validation Intent
 
 Use `source-provenance-audit` and `decision-traceability-audit` to check that every pain has a real trigger and workaround rather than an unverified complaint.
 
@@ -81,14 +81,22 @@ Use `source-provenance-audit` and `decision-traceability-audit` to check that ev
 
 Platform-by-platform catalog with the minimum quality/pain coverage, evidence fields, classifications, and Weft response decision.
 
-## Quality Gate Evidence
+## Research Review Evidence
 
 | Gate | Decision | Evidence / Justification |
 | --- | --- | --- |
-| Changed files | missing | Implementation worker must list the pain catalog and linked matrix/planning artifact paths updated by this phase. |
+| Changed files | recorded | `praised-qualities-and-pains.md` and this phase ledger. |
 | Tests | not applicable | Business-analysis scope changes research documentation only, not executable business behavior. |
 | Gherkin/Playwright E2E | not applicable | Business-analysis scope does not implement browser behavior or the reference application. |
-| Code review | not applicable | Business-analysis scope is documentation-only; decision traceability audit is the phase review evidence. |
+| Research review | passed | The catalog's coverage and traceability audits pass. |
+
+## Manual Phase Completion Evidence
+
+`praised-qualities-and-pains.md` contains five material qualities and five pains
+for each mandatory platform/state family. Every pain records trigger,
+consequence, workaround/cost, severity, confidence, grade, causal
+classification, and a controlled Weft response; no Grade-D anecdote is used as
+a requirement source.
 
 ## Acceptance Criteria
 
