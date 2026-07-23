@@ -6,9 +6,9 @@ long-lived NuGet API key is stored in GitHub.
 
 ## Package IDs
 
-- `AboimPinto.Weft.Abstractions`
-- `AboimPinto.Weft.Server`
-- `AboimPinto.Weft.Generator`
+- `WeftDotNet.Abstractions`
+- `WeftDotNet.Server`
+- `WeftDotNet.Generator`
 
 The owner-qualified prefix avoids the unrelated `Weft.Server` package already
 published on NuGet.org. See [naming.md](naming.md).
@@ -54,6 +54,6 @@ version rather than trying to replace package bytes.
 
 ## Template package
 
-`AboimPinto.Weft.Templates` will join the same release set after the template
+`WeftDotNet.Templates` will join the same release set after the template
 package and generated-project matrix are implemented. The CD workflow must not
 claim or publish an empty placeholder package.

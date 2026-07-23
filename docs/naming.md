@@ -15,15 +15,17 @@ An availability check on 2026-07-23 found that `Weft.Server` is already
 published by the unrelated `StrangeDaysTech/weft` .NET CRDT project. Weft must
 not publish under that package ID.
 
-Experimental packages use the owner-qualified prefix:
+Experimental packages use the `WeftDotNet` product prefix:
 
-- `AboimPinto.Weft.Abstractions`;
-- `AboimPinto.Weft.Server`;
-- `AboimPinto.Weft.Generator`;
-- `AboimPinto.Weft.Templates` when the template package is implemented.
+- `WeftDotNet.Abstractions`;
+- `WeftDotNet.Server`;
+- `WeftDotNet.Generator`;
+- `WeftDotNet.Templates` when the template package is implemented.
 
-The qualified IDs avoid the known NuGet collision, but they are not a legal or
-commercial clearance of the Weft product name.
+The initial `AboimPinto.Weft.*` prereleases were deprecated and unlisted before
+public adoption. The `WeftDotNet` IDs avoid both the known `Weft.Server`
+collision and an owner name in the public product identity, but they are not a
+legal or commercial clearance of the Weft product name.
 
 ## Before commercial use
 

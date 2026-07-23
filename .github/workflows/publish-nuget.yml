@@ -111,9 +111,9 @@ jobs:
           import zipfile
 
           expected = {
-              "AboimPinto.Weft.Abstractions",
-              "AboimPinto.Weft.Server",
-              "AboimPinto.Weft.Generator",
+              "WeftDotNet.Abstractions",
+              "WeftDotNet.Server",
+              "WeftDotNet.Generator",
           }
           version = os.environ["PACKAGE_VERSION"]
           package_dir = Path("artifacts/packages")
@@ -170,8 +170,8 @@ jobs:
               <Nullable>enable</Nullable>
             </PropertyGroup>
             <ItemGroup>
-              <PackageReference Include="AboimPinto.Weft.Server" Version="$PACKAGE_VERSION" />
-              <PackageReference Include="AboimPinto.Weft.Generator" Version="$PACKAGE_VERSION"
+              <PackageReference Include="WeftDotNet.Server" Version="$PACKAGE_VERSION" />
+              <PackageReference Include="WeftDotNet.Generator" Version="$PACKAGE_VERSION"
                                 OutputItemType="Analyzer"
                                 ReferenceOutputAssembly="false" />
             </ItemGroup>

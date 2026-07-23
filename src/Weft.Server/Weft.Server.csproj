@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <PackageId>AboimPinto.Weft.Server</PackageId>
+    <PackageId>WeftDotNet.Server</PackageId>
     <Description>ASP.NET Core hosting infrastructure for Weft feature modules.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>weft;aspnetcore;html;feature-modules;server</PackageTags>

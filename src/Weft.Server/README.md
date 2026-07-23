@@ -1,4 +1,4 @@
-# AboimPinto.Weft.Server
+# WeftDotNet.Server
 
 Experimental ASP.NET Core hosting infrastructure for Weft HTML-first feature
 modules.

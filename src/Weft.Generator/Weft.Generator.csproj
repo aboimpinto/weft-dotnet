@@ -6,7 +6,7 @@
     <IncludeSymbols>false</IncludeSymbols>
     <OutputItemType>Analyzer</OutputItemType>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-    <PackageId>AboimPinto.Weft.Generator</PackageId>
+    <PackageId>WeftDotNet.Generator</PackageId>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <Description>Source generator for explicitly trusted Weft server feature manifests.</Description>
