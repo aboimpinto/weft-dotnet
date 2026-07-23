@@ -1,0 +1,287 @@
+name: Publish NuGet packages
+
+on:
+  push:
+    tags:
+      - "Weft-v*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Package version for a build-only release rehearsal
+        required: true
+        default: 0.1.0-alpha.1
+        type: string
+
+concurrency:
+  group: nuget-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build-packages:
+    name: Build, test, and pack
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          global-json-file: global.json
+
+      - name: Resolve and validate package version
+        id: version
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          MANUAL_VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+
+          if [[ "$EVENT_NAME" == "push" ]]; then
+            version="${REF_NAME#Weft-v}"
+            git fetch origin master
+            if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/master; then
+              echo "Release tags must point to a commit contained in origin/master." >&2
+              exit 1
+            fi
+          else
+            version="$MANUAL_VERSION"
+          fi
+
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z][0-9A-Za-z.-]*)?$ ]]; then
+            echo "Invalid SemVer package version: $version" >&2
+            exit 1
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Packaging version $version"
+
+      - name: Restore
+        run: dotnet restore Weft.sln
+
+      - name: Test
+        run: dotnet test Weft.sln --configuration Release --no-restore
+
+      - name: Pack framework packages
+        shell: bash
+        env:
+          PACKAGE_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/packages
+
+          projects=(
+            src/Weft.Abstractions/Weft.Abstractions.csproj
+            src/Weft.Server/Weft.Server.csproj
+            src/Weft.Generator/Weft.Generator.csproj
+          )
+
+          for project in "${projects[@]}"; do
+            dotnet pack "$project" \
+              --configuration Release \
+              --no-restore \
+              --output artifacts/packages \
+              -p:PackageVersion="$PACKAGE_VERSION" \
+              -p:ContinuousIntegrationBuild=true
+          done
+
+      - name: Validate package identities and versions
+        shell: bash
+        env:
+          PACKAGE_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          import sys
+          import xml.etree.ElementTree as ET
+          import zipfile
+
+          expected = {
+              "AboimPinto.Weft.Abstractions",
+              "AboimPinto.Weft.Server",
+              "AboimPinto.Weft.Generator",
+          }
+          version = os.environ["PACKAGE_VERSION"]
+          package_dir = Path("artifacts/packages")
+          packages = sorted(
+              path for path in package_dir.glob("*.nupkg")
+              if not path.name.endswith(".snupkg")
+          )
+
+          found = set()
+          for package in packages:
+              with zipfile.ZipFile(package) as archive:
+                  nuspec_names = [name for name in archive.namelist() if name.endswith(".nuspec")]
+                  if len(nuspec_names) != 1:
+                      raise SystemExit(f"{package}: expected exactly one nuspec")
+                  root = ET.fromstring(archive.read(nuspec_names[0]))
+
+              namespace = root.tag.partition("}")[0].lstrip("{")
+              prefix = f"{{{namespace}}}" if namespace else ""
+              metadata = root.find(f"{prefix}metadata")
+              package_id = metadata.findtext(f"{prefix}id") if metadata is not None else None
+              package_version = metadata.findtext(f"{prefix}version") if metadata is not None else None
+
+              if package_id not in expected:
+                  raise SystemExit(f"{package}: unexpected package ID {package_id!r}")
+              if package_version != version:
+                  raise SystemExit(
+                      f"{package}: version {package_version!r} does not match {version!r}"
+                  )
+              found.add(package_id)
+
+          if found != expected:
+              raise SystemExit(
+                  f"Package set mismatch; missing={sorted(expected - found)}, "
+                  f"unexpected={sorted(found - expected)}"
+              )
+
+          print(f"Validated {len(packages)} packages at version {version}")
+          PY
+
+      - name: Build a package-only consumer
+        shell: bash
+        env:
+          PACKAGE_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          consumer="$RUNNER_TEMP/weft-package-consumer"
+          mkdir -p "$consumer"
+
+          cat > "$consumer/PackageConsumer.csproj" <<EOF
+          <Project Sdk="Microsoft.NET.Sdk.Web">
+            <PropertyGroup>
+              <TargetFramework>net10.0</TargetFramework>
+              <ImplicitUsings>enable</ImplicitUsings>
+              <Nullable>enable</Nullable>
+            </PropertyGroup>
+            <ItemGroup>
+              <PackageReference Include="AboimPinto.Weft.Server" Version="$PACKAGE_VERSION" />
+              <PackageReference Include="AboimPinto.Weft.Generator" Version="$PACKAGE_VERSION"
+                                OutputItemType="Analyzer"
+                                ReferenceOutputAssembly="false" />
+            </ItemGroup>
+          </Project>
+          EOF
+
+          cat > "$consumer/Program.cs" <<'EOF'
+          using PackageConsumer;
+          using Weft.Server;
+
+          var builder = WebApplication.CreateBuilder(args);
+          builder.Services.AddWeft(PackageFeature.Manifest);
+          var app = builder.Build();
+          app.MapWeft();
+          EOF
+
+          cat > "$consumer/PackageFeature.cs" <<'EOF'
+          using Microsoft.AspNetCore.Routing;
+          using Microsoft.Extensions.DependencyInjection;
+          using Weft;
+          using Weft.Server;
+
+          namespace PackageConsumer;
+
+          [WeftFeature("package-consumer")]
+          [WeftRoute("/package-consumer", Name = "package-consumer.page")]
+          public sealed partial class PackageFeature : IWeftServerFeature
+          {
+              public void RegisterServices(IServiceCollection services) { }
+
+              public void MapEndpoints(IEndpointRouteBuilder endpoints)
+              {
+                  endpoints.MapGet("/package-consumer", static () => "Package consumer works.");
+              }
+          }
+          EOF
+
+          dotnet restore "$consumer/PackageConsumer.csproj" \
+            --source "$GITHUB_WORKSPACE/artifacts/packages"
+          dotnet build "$consumer/PackageConsumer.csproj" \
+            --configuration Release \
+            --no-restore
+
+      - name: Create checksum manifest
+        working-directory: artifacts/packages
+        run: sha256sum *.nupkg > SHA256SUMS
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: nuget-${{ steps.version.outputs.version }}
+          path: |
+            artifacts/packages/*.nupkg
+            artifacts/packages/SHA256SUMS
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    name: Publish to NuGet.org
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/Weft-v')
+    needs: build-packages
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Set up .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          global-json-file: global.json
+
+      - name: Download validated package artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: nuget-${{ needs.build-packages.outputs.version }}
+          path: artifacts/packages
+
+      - name: Authenticate to NuGet.org with OIDC
+        id: nuget-login
+        uses: NuGet/login@ebc737b6fc418a6ca0073cf116ec8dc156d8b81e # v1
+        with:
+          user: AboimPinto
+
+      - name: Publish packages
+        shell: bash
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: |
+          set -euo pipefail
+          for package in artifacts/packages/*.nupkg; do
+            [[ "$package" == *.snupkg ]] && continue
+            dotnet nuget push "$package" \
+              --api-key "$NUGET_API_KEY" \
+              --source https://api.nuget.org/v3/index.json \
+              --skip-duplicate
+          done
+
+      - name: Create or update GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          VERSION: ${{ needs.build-packages.outputs.version }}
+        run: |
+          set -euo pipefail
+          files=(artifacts/packages/*.nupkg artifacts/packages/SHA256SUMS)
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "${files[@]}" --clobber
+          else
+            gh release create "$TAG" "${files[@]}" \
+              --verify-tag \
+              --generate-notes \
+              --title "Weft $VERSION"
+          fi

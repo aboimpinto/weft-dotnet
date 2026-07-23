@@ -3,13 +3,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <IsRoslynComponent>true</IsRoslynComponent>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
     <OutputItemType>Analyzer</OutputItemType>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-    <PackageId>Weft.Generator</PackageId>
-    <Version>0.1.0-alpha.1</Version>
+    <PackageId>AboimPinto.Weft.Generator</PackageId>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <Description>Source generator for explicitly trusted Weft server feature manifests.</Description>
+    <PackageTags>weft;roslyn;source-generator;aspnetcore;feature-modules</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>Weft.Abstractions</PackageId>
+    <PackageId>AboimPinto.Weft.Abstractions</PackageId>
     <Description>Feature metadata contracts for the Weft HTML-first .NET platform.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>weft;aspnetcore;html;feature-modules;abstractions</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
 </Project>
