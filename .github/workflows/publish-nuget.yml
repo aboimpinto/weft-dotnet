@@ -217,7 +217,7 @@ jobs:
 
       - name: Create checksum manifest
         working-directory: artifacts/packages
-        run: sha256sum *.nupkg > SHA256SUMS
+        run: sha256sum *.nupkg *.snupkg > SHA256SUMS
 
       - name: Upload package artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -225,6 +225,7 @@ jobs:
           name: nuget-${{ steps.version.outputs.version }}
           path: |
             artifacts/packages/*.nupkg
+            artifacts/packages/*.snupkg
             artifacts/packages/SHA256SUMS
           if-no-files-found: error
           retention-days: 30
@@ -279,7 +280,11 @@ jobs:
           VERSION: ${{ needs.build-packages.outputs.version }}
         run: |
           set -euo pipefail
-          files=(artifacts/packages/*.nupkg artifacts/packages/SHA256SUMS)
+          files=(
+            artifacts/packages/*.nupkg
+            artifacts/packages/*.snupkg
+            artifacts/packages/SHA256SUMS
+          )
 
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" "${files[@]}" --clobber
