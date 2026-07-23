@@ -87,6 +87,8 @@ Weft will be **NuGet-first and npm-compatible**:
   toolchain on projects that do not need one.
 
 The full decision is in [docs/package-ecosystem.md](docs/package-ecosystem.md).
+Release safeguards and the tag-driven NuGet.org process are documented in
+[docs/releasing.md](docs/releasing.md).
 
 ## Architecture in one view
 
